@@ -1,9 +1,10 @@
-const PORT = 4004;
 // server.js
+const queryString = require("query-string");
 const jsonServer = require("json-server");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
+const PORT = 4004;
 
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
@@ -19,6 +20,30 @@ server.use((req, res, next) => {
     // Continue to JSON Server router
     next();
 });
+
+router.render = (req, res) => {
+    // Check GET with pagination
+    // If yes, custom output
+    const headers = res.getHeaders();
+
+    const totalCountHeader = headers["x-total-count"];
+    if (req.method === "GET" && totalCountHeader) {
+        const queryParams = queryString.parse(req._parsedUrl.query);
+
+        const result = {
+            data: res.locals.data,
+            pagination: {
+                _page: Number.parseInt(queryParams._page) || 1,
+                _limit: Number.parseInt(queryParams._limit) || 5,
+                _totalRows: Number.parseInt(totalCountHeader),
+            },
+        };
+
+        return res.jsonp(result);
+    }
+    // otherwise
+    res.jsonp(res.locals.data);
+};
 
 server.use(middlewares);
 server.use("/api", router);
