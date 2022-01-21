@@ -17,6 +17,7 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^6.0.0-alpha.3",
+        "json-server-auth": "^2.1.0",
         "nodemon": "^2.0.15"
     }
 }

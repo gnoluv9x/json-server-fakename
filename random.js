@@ -3,18 +3,10 @@ const fs = require("fs");
 //locale
 faker.locale = "vi";
 
-// console.log(faker.name.firstName());
-// console.log(faker.internet.email());
-
-// console.log(faker.commerce.product());
-// console.log(faker.commerce.price());
-
-// console.log(faker.random.image());
-// console.log(faker.datatype.uuid());
-
 function randomCategoriesList(numb) {
     if (numb <= 0) return [];
     const listCategories = [];
+
     Array.from(new Array(numb)).forEach(item => {
         const category = {
             id: faker.datatype.uuid(),
@@ -28,13 +20,35 @@ function randomCategoriesList(numb) {
 
     return listCategories;
 }
+function randomProduct(categoriesList, numberOfProduct) {
+    if (!Array.isArray(categoriesList) || numberOfProduct <= 0) return [];
 
-const listCategories = randomCategoriesList(4);
+    const productList = [];
+
+    for (const category of categoriesList) {
+        Array.from(new Array(numberOfProduct)).forEach(() => {
+            const product = {
+                categoryId: category.id,
+                id: faker.datatype.uuid(),
+                name: faker.commerce.productName(),
+                color: faker.commerce.color(),
+                price: Number.parseFloat(faker.commerce.price()),
+                thumbnail: faker.image.imageUrl(400, 400, "food"),
+            };
+
+            productList.push(product);
+        });
+    }
+    return productList;
+}
+
 (() => {
+    const listCategories = randomCategoriesList(4);
+    const listProduct = randomProduct(listCategories, 5);
     // prepare data
     const db = {
         categories: listCategories,
-        product: [],
+        products: listProduct,
         info: {
             createdBy: "VuLong",
         },
