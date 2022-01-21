@@ -4,7 +4,7 @@ const jsonServer = require("json-server");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-const PORT = 4004;
+const PORT = process.env.PORT || 4110;
 
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
