@@ -1,0 +1,30 @@
+{
+    "categories": [
+        {
+            "id": "b13b040c-329f-4b9c-be3b-176884ec551a",
+            "name": "Garden",
+            "createdAt": 1642732453150,
+            "updatedAt": 1642732453150
+        },
+        {
+            "id": "7f8bf9ea-52e7-4a93-b2bb-e0e46ea824bf",
+            "name": "Outdoors",
+            "createdAt": 1642732453150,
+            "updatedAt": 1642732453150
+        },
+        {
+            "id": "a8e63727-dfe6-48b0-937d-92126f1ec491",
+            "name": "Clothing",
+            "createdAt": 1642732453150,
+            "updatedAt": 1642732453150
+        },
+        {
+            "id": "fe526e57-97cd-47aa-977a-b3a77a96192c",
+            "name": "Baby",
+            "createdAt": 1642732453150,
+            "updatedAt": 1642732453150
+        }
+    ],
+    "product": [],
+    "info": { "createdBy": "VuLong" }
+}
